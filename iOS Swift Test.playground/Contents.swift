@@ -16,37 +16,22 @@ func test1(list: [Int]) -> [Int] {
 }
 
 func forLoop(list: [Int]) -> Int {
-    var sum = 0
-    for i in 0..<list.count {
-        sum += list[i]
-    }
-    return sum
+    return -1
 }
 
 func forEachLoop(list: [Int]) -> Int {
-    var sum = 0
-    for i in list {
-        sum += i
-    }
-    return sum
+    return -1
 }
 
 func whileLoop(list: [Int]) -> Int {
-    var sum = 0
-    var i = list.count - 1
-    while i >= 0 {
-        sum += list[i]
-        i = i - 1
-    }
-    return sum
+    return -1
 }
 
 func recursive(list: [Int]) -> Int {
-    let sum = list.reduce(0, +)
-    return sum
+    return -1
 }
 
-test1(list: [6,3,4,5]) // -> should return [10,10,10,10]
+test1(list: [1,2,3,4]) // -> should return [10,10,10,10]
 
 
 
@@ -61,26 +46,11 @@ test1(list: [6,3,4,5]) // -> should return [10,10,10,10]
 
 func test2(list1: [Any], list2: [Any]) -> [Any] {
     var final: [Any] = []
-
-//    guard list1.count == list2.count else {
-//        return final
-//    }
-    
-    let max = list1.count > list2.count ? list1.count : list2.count
-
-    for i in 0..<max {
-        if list1.count > i {
-            final.append(list1[i])
-        }
-        if list2.count > i {
-            final.append(list2[i])
-        }
-    }
     
     return final
 }
 
-test2(list1: [], list2: [])
+test2(list1: [1,2,3], list2: ["a", "b", "c"])
 
 
 
@@ -134,20 +104,7 @@ test3(matrix: [2,3,2,1,
  */
 
 func test4(nb: Int) -> [Int] {
-    guard nb >= 0 else {
-        return []
-    }
-
-    if nb == 0 {
-        return [0]
-    } else if nb == 1 {
-        return [0, 1]
-    } else {
-        var list = [Int]()
-        var auxList = test4(nb: nb - 1)
-        list = auxList + [(auxList[auxList.count - 1] + auxList[auxList.count - 2])]
-        return list
-    }
+    return [-1]
 }
 
 test4(nb: 10) // should return [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
@@ -166,30 +123,6 @@ test4(nb: 10) // should return [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
  */
 
 func test5(list: [Int]) -> Int {
-    /*var myList = list
-    
-    func getNumberOfDigits(number: Int) -> Int {
-        return String(number).characters.count
-    }
-    
-    let n = getNumberOfDigits(number: 678)
-    pow(10, n - 1)
-
-    
-    myList.sorted {
-        
-        let a = getNumberOfDigits(number: $0)
-        let b = getNumberOfDigits(number: $1)
-        if a > b {
-            return true
-        } else if a < b {
-            return false
-        } else {
-            return ($0 > $1)
-        }
-    }
-    
-    */
     return 0
 }
 
