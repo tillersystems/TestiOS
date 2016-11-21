@@ -45,7 +45,7 @@ test1(list: [1,2,3,4]) // -> should return [10,10,10,10]
  */
 
 func test2(list1: [Any], list2: [Any]) -> [Any] {
-    var final: [Any] = []
+    let final: [Any] = []
     
     return final
 }
