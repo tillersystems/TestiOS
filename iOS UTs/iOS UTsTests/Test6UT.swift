@@ -61,6 +61,7 @@ class Test6UT: XCTestCase {
         expected = expected.sorted()
         actual = actual.sorted()
         
+        XCTAssert(expected.count == actual.count)
         for i in 0..<expected.count {
             XCTAssert(expected[i] == actual[i])
         }

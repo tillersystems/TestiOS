@@ -33,7 +33,16 @@ class Test3: NSObject {
      *     [ 1  2 *2 *1 ] => 2 + 5 + 2 + 3 + 2 + 1 => 15
      */
     
-    public static func test3(matrix: [Int], height: Int, width: Int) -> Int {
-        return -1
+    public static func test3(matrix: [[Int]], height: Int, width: Int) -> Int {
+        return calculate(matrix: matrix, height: height, width: width, x: 0, y: 0)
+    }
+    
+    static func calculate(matrix: [[Int]], height: Int, width: Int, x: Int, y: Int) -> Int {
+        if x >= width || y >= height {
+            return 0
+        } else {
+            return matrix[y][x] + max(self.calculate(matrix: matrix, height: height, width: width, x: x + 1, y: y),
+                                      self.calculate(matrix: matrix, height: height, width: width, x: x, y: y + 1));
+        }
     }
 }

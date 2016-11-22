@@ -21,6 +21,23 @@ class Test5: NSObject {
      */
     
     public static func test5(list: [Int]) -> Int {
-        return 0
+        guard list.count > 0 else {
+            return 0
+        }
+        
+        var stringList: [String] = []
+        for i in list {
+            stringList.append(String(i))
+        }
+        stringList = stringList.sorted(by: { (value1, value2) -> Bool in
+            return value1 > value2
+        })
+
+        var str: String = ""
+        for i in stringList {
+            str = "\(str)\(i)"
+        }
+        
+        return Int(str)!
     }
 }

@@ -21,28 +21,28 @@ class Test3UT: XCTestCase {
         super.tearDown()
     }
     
-    func emptyMatrix() {
+    func testEmptyMatrix() {
         let test = Test3.test3(matrix: [], height: 0, width: 0)
         XCTAssert(test == 0)
     }
 
-    func emptySingleElement() {
-        let test = Test3.test3(matrix: [2], height: 1, width: 1)
+    func testEmptySingleElement() {
+        let test = Test3.test3(matrix: [[2]], height: 1, width: 1)
         XCTAssert(test == 2)
     }
     
-    func emptyEasyMatrix() {
-        let test = Test3.test3(matrix: [2,3,2,1,
-                                        5,2,3,1,
-                                        1,2,2,1], height: 4, width: 3)
+    func testEmptyEasyMatrix() {
+        let test = Test3.test3(matrix: [[2,3,2,1],
+                                        [5,2,3,1],
+                                        [1,2,2,1]], height: 3, width: 4)
         XCTAssert(test == 15)
     }
 
-    func emptyHardMatrix() {
-        let test = Test3.test3(matrix: [1,4,16,16,32,
-                                        5,6,7,8,11,
-                                        8,21,2,2,4,
-                                        42,4,8,7,3], height: 5, width: 4)
+    func testEmptyHardMatrix() {
+        let test = Test3.test3(matrix: [[1,4,16,16,32],
+                                        [5,6,7,8,11],
+                                        [8,21,2,2,4],
+                                        [42,4,8,7,3]], height: 4, width: 5)
         XCTAssert(test == 87)
     }
 }
