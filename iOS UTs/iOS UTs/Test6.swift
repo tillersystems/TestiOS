@@ -22,7 +22,7 @@ class Test6: NSObject {
      * Formatted as "1+2+34-5+67-8+9".
      */
     
-    public static func test6() -> [[String]] {
-        return [["1", "+", "2", "+", "34", "-", "5", "+", "67", "-", "8", "+", "9"]]
+    public static func test6() -> [String] {
+        return ["1+2+34-5+67-8+9", "solution2", "solution 3"]
     }
 }

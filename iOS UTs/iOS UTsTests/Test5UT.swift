@@ -21,7 +21,28 @@ class Test5UT: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testNull() {
+        let test = Test5.test5(list: [])
+        XCTAssert(test == 0)
+    }
+    
+    func testSingle() {
+        let test = Test5.test5(list: [1])
+        XCTAssert(test == 1)
+    }
+    
+    func testDouble() {
+        let test = Test5.test5(list: [2,1])
+        XCTAssert(test == 21)
+    }
 
+    func testComplex() {
+        let test = Test5.test5(list: [50,2,1,9])
+        XCTAssert(test == 95021)
+    }
+    
+    func testHard() {
+        let test = Test5.test5(list: [502, 503, 8, 9])
+        XCTAssert(test == 98503502)
     }
 }
