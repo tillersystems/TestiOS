@@ -25,15 +25,10 @@
 		842FFF9A1DE36482008739A0 /* Test5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFF981DE36482008739A0 /* Test5.swift */; };
 		842FFF9C1DE36497008739A0 /* Test6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFF9B1DE36497008739A0 /* Test6.swift */; };
 		842FFF9D1DE36497008739A0 /* Test6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFF9B1DE36497008739A0 /* Test6.swift */; };
-		842FFF9F1DE3654D008739A0 /* Test2UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFF9E1DE3654D008739A0 /* Test2UT.swift */; };
 		842FFFA01DE3654D008739A0 /* Test2UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFF9E1DE3654D008739A0 /* Test2UT.swift */; };
-		842FFFA21DE3655B008739A0 /* Test3UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFA11DE3655B008739A0 /* Test3UT.swift */; };
 		842FFFA31DE3655B008739A0 /* Test3UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFA11DE3655B008739A0 /* Test3UT.swift */; };
-		842FFFA51DE36563008739A0 /* Test4UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFA41DE36563008739A0 /* Test4UT.swift */; };
 		842FFFA61DE36563008739A0 /* Test4UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFA41DE36563008739A0 /* Test4UT.swift */; };
-		842FFFA81DE3656D008739A0 /* Test5UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFA71DE3656D008739A0 /* Test5UT.swift */; };
 		842FFFA91DE3656D008739A0 /* Test5UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFA71DE3656D008739A0 /* Test5UT.swift */; };
-		842FFFAB1DE36578008739A0 /* Test6UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFAA1DE36578008739A0 /* Test6UT.swift */; };
 		842FFFAC1DE36578008739A0 /* Test6UT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FFFAA1DE36578008739A0 /* Test6UT.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +64,8 @@
 		842FFFA41DE36563008739A0 /* Test4UT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test4UT.swift; sourceTree = "<group>"; };
 		842FFFA71DE3656D008739A0 /* Test5UT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test5UT.swift; sourceTree = "<group>"; };
 		842FFFAA1DE36578008739A0 /* Test6UT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test6UT.swift; sourceTree = "<group>"; };
+		842FFFB41DE447B9008739A0 /* iOS_UTsTests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_UTsTests2.swift; sourceTree = "<group>"; };
+		842FFFB61DE447B9008739A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +91,7 @@
 			children = (
 				842FFF6A1DE3601C008739A0 /* iOS UTs */,
 				842FFF7F1DE3601C008739A0 /* iOS UTsTests */,
+				842FFFB31DE447B9008739A0 /* iOS UTsTests2 */,
 				842FFF691DE3601C008739A0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -146,6 +144,15 @@
 				842FFF9B1DE36497008739A0 /* Test6.swift */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		842FFFB31DE447B9008739A0 /* iOS UTsTests2 */ = {
+			isa = PBXGroup;
+			children = (
+				842FFFB41DE447B9008739A0 /* iOS_UTsTests2.swift */,
+				842FFFB61DE447B9008739A0 /* Info.plist */,
+			);
+			path = "iOS UTsTests2";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,15 +264,10 @@
 				842FFF901DE36414008739A0 /* Test2.swift in Sources */,
 				842FFF991DE36482008739A0 /* Test5.swift in Sources */,
 				842FFF8D1DE36036008739A0 /* Test1.swift in Sources */,
-				842FFFA51DE36563008739A0 /* Test4UT.swift in Sources */,
 				842FFF9C1DE36497008739A0 /* Test6.swift in Sources */,
 				842FFF6E1DE3601C008739A0 /* ViewController.swift in Sources */,
 				842FFF6C1DE3601C008739A0 /* AppDelegate.swift in Sources */,
-				842FFF9F1DE3654D008739A0 /* Test2UT.swift in Sources */,
-				842FFFA21DE3655B008739A0 /* Test3UT.swift in Sources */,
-				842FFFA81DE3656D008739A0 /* Test5UT.swift in Sources */,
 				842FFF931DE36469008739A0 /* Test3.swift in Sources */,
-				842FFFAB1DE36578008739A0 /* Test6UT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

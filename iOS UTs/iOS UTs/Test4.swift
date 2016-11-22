@@ -24,6 +24,26 @@ class Test4: NSObject {
      */
     
     public static func test4(nb: Int) -> [Int] {
-        return [-1]
+        guard nb > 0 else {
+            return []
+        }
+        
+        var list: [Int] = []
+        list.append(0)
+        if nb == 1 {
+            return list
+        }
+        list.append(1)
+        if nb == 2 {
+            return list
+        }
+        
+        for i in 2..<nb {
+            let x = list[i-2]
+            let y = list[i-1]
+            list.append(x+y)
+        }
+        
+        return list
     }
 }

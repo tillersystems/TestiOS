@@ -19,8 +19,20 @@ class Test2: NSObject {
      */
     
     public static func test2(list1: [Any], list2: [Any]) -> [Any] {
-        let final: [Any] = []
+        var final: [Any] = []
         
+        let max = list1.count > list2.count ? list1.count : list2.count
+        
+        for i in 0..<max {
+            if list1.count > i {
+                final.append(list1[i])
+            }
+            if list2.count > i {
+                final.append(list2[i])
+            }
+
+        }
+
         return final
     }
 }

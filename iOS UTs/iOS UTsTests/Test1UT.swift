@@ -1,6 +1,6 @@
 //
-//  iOS_UTsTests.swift
-//  iOS UTsTests
+//  Test1UT.swift
+//  iOS UTs
 //
 //  Created by Felix Carrard on 21/11/2016.
 //  Copyright © 2016 Felix Carrard. All rights reserved.
@@ -23,7 +23,7 @@ class Test1UT: XCTestCase {
     
     func testEmpty() {
         let test = Test1.test1(list: [])
-        XCTAssert(test == [])
+        XCTAssert(test == [0,0,0,0])
     }
     
     func testSingle() {
