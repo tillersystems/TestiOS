@@ -1,159 +1,99 @@
 //: Playground - noun: a place where people can play
 
-import UIKit
+import Foundation
 
-
-// -------------------------- TEST 1 -------------------------------
-
-/**
- * @TODO:
- * Write a function that compute the sum of the numbers in a given
- * list using a for-loop, foreach-loop, a while-loop, and recursion.
- */
-
-func test1(list: [Int]) -> [Int] {
-    return [forLoop(list: list), forEachLoop(list: list), whileLoop(list: list), recursive(list: list)]
+struct JobError: Error {
+    public var error: Error
+    public var data: Any?
 }
 
-func forLoop(list: [Int]) -> Int {
-    return -1
+typealias JobInfo = Optional<Any>
+typealias JobResult = Result<JobInfo, JobError>
+
+protocol Job {
+    var identifier: String { get }
+    /// Job work
+    func execute() -> JobResult
 }
 
-func forEachLoop(list: [Int]) -> Int {
-    return -1
+enum JobErrors: Error {
+    case notImplemented
 }
 
-func whileLoop(list: [Int]) -> Int {
-    return -1
+protocol JobQueue {
+
+    // MARK: - JobQueue properties
+
+    /// Identifier can be usefull to differenciate multiple job queues
+    var identifier: String { get }
+    /// Job items waiting to process
+    var jobs: [Job] { get }
+
+    /// Serial queue to execute Jobs
+    var queue: DispatchQueue { get }
+
+    // MARK: - JobQueue methods
+
+    /// This job queue is an auto-executed job queue
+    /// So, when you enqueue a job, it's executed as soon as posible
+    func enqueue(job: Job, completion: (JobResult) -> Void)
+
+    /// You can cancel a job
+    func cancelJob(with jobIdentifier: String)
+
+    /// You can cancel all jobs
+    func cancelAll()
 }
 
-func recursive(list: [Int]) -> Int {
-    return -1
+
+// MARK: - TODO -
+// You are free to edit what's you want !
+
+struct AsyncJob: Job {
+    var identifier: String
+
+    func execute() -> JobResult {
+        // Execute an async job which wait random second (between 1 and 10) before print it self (identifier). Add a timeout after  5second, and  return an error.
+
+        return .failure(JobError(error: JobErrors.notImplemented, data: self))
+    }
 }
 
-test1(list: [1,2,3,4]) // -> should return [10,10,10,10]
+struct TestQueue: JobQueue {
+    var identifier: String
 
+    var jobs: [Job]
 
+    var queue: DispatchQueue
 
-// -------------------------- TEST 2 -------------------------------
+    func enqueue(job: Job, completion: (JobResult) -> Void) {
+        // Enqueue Job and execute it
+    }
 
-/**
- * @TODO:
- * Write a function that combines two lists by alternatingly taking
- * elements. For exemple: given two lists [A, B, C] and [1, 2, 3], the
- * results sould be [A, 1, B, 2, C, 3]
- */
+    func cancelJob(with jobIdentifier: String) {
+        // cancel given Job
+    }
 
-func test2(list1: [Any], list2: [Any]) -> [Any] {
-    let final: [Any] = []
-    
-    return final
+    func cancelAll() {
+        // Cancel all jobs
+    }
 }
 
-test2(list1: [1,2,3], list2: ["a", "b", "c"])
 
+func main() {
+    // 1 - Enqueue Jobs
 
+    // 2 - Execute them
 
-// -------------------------- TEST 3 -------------------------------
+    // 3 - Print error when happens
 
-/**
- * @TODO:
- *
- * Let's A be a matrix
- * A = [ 2  3  2  1 ]
- *     [ 5  2  3  1 ]
- *     [ 1  2  2  1 ]
- * width = 4
- * heigh = 3
- *
- * You can move RIGTH or DOWN.
- * You cannot move UP or LEFT.
- *
- * Write a function that calculate the highest path sum in a matrix
- * following this rule (move only RIGTH or DOWN)
- *
- * In this example :
- *     [*2  3  2  1 ]
- *     [*5 *2 *3  1 ]
- *     [ 1  2 *2 *1 ] => 2 + 5 + 2 + 3 + 2 + 1 => 15
- */
-
-
-func test3(matrix: [Int], height: Int, width: Int) -> Int {
-    return -1
+    // 4 - print end  when all jobs are done
 }
 
-test3(matrix: [2,3,2,1,
-               5,2,3,1,
-               1,2,2, 1], height: 3, width: 4) // Should return the max number of point you can have, here it would be 15
+func mainCancel() {
+    // Prepare queue like previous func
 
+    // 1 - Cancel one job and check that callback print an error
 
-
-// -------------------------- TEST 4 -------------------------------
-
-/**
- * @TODO:
- *
- * Write a function that computes the list of the first n Fibonacci
- * numbers. By definition, the first two numbers in the Fibonacci
- * sequence are 0 and 1, and each subsequent number is the sum of the
- * previous two.
- *
- * As an example, here are the first 10 Fibonnaci
- * numbers: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34].
- */
-
-func test4(nb: Int) -> [Int] {
-    return [-1]
+    // 2 - cancel all jobs and check that all callback print error
 }
-
-test4(nb: 10) // should return [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
-
-
-
-// -------------------------- TEST 5 -------------------------------
-
-/**
- * @TODO:
- *
- * Write a function that given a list of non negative integers,
- * arranges them such that they form the largest possible number.
- *
- * For example, given [50, 2, 1, 9] the largest formed number is 95021.
- */
-
-func test5(list: [Int]) -> Int {
-    return 0
-}
-
-test5(list: [50, 2, 1, 9]) // should return 95021
-
-
-
-// -------------------------- TEST 6 -------------------------------
-
-/**
- * @TODO:
- *
- * Write a program that outputs all possibilities to put + or - or
- * nothing between the numbers 1, 2, ..., 9 (in this order) such that
- * the result is always 100.
- *
- * For example: 1 + 2 + 34 – 5 + 67 – 8 + 9 = 100.
- * Formatted as "1+2+34-5+67-8+9".
- */
-
-func test6() -> [[String]] {
-    return [["1", "+", "2", "+", "34", "-", "5", "+", "67", "-", "8", "+", "9"]]
-}
-
-test6()
-
-
-
-
-
-
-
-
-
