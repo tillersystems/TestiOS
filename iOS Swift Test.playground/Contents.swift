@@ -1,25 +1,34 @@
-//: Playground - noun: a place where people can play
-
 import Foundation
 
+// -------------------------------------------------------- \\
+// MARK - Environment / needed ressources
+
+/// Different kind of possible errors after a job execution
+enum JobErrors: Error {
+    case notImplemented
+    case timeout
+}
+
+/// Simple struct to describe a Job error
 struct JobError: Error {
-    public var error: Error
+    /// Permit to know what's kind of error it is.
+    public var error: JobErrors
+    /// Aditional information, depend of the context
     public var data: Any?
 }
 
 typealias JobInfo = Optional<Any>
 typealias JobResult = Result<JobInfo, JobError>
 
+/// Protocol to define minimal requirement to describe a Job
 protocol Job {
+    /// Unique identifier to identify current job
     var identifier: String { get }
     /// Job work
     func execute() -> JobResult
 }
 
-enum JobErrors: Error {
-    case notImplemented
-}
-
+/// Protocol to define minimal requirements to descript a Job queue
 protocol JobQueue {
 
     // MARK: - JobQueue properties
@@ -45,10 +54,24 @@ protocol JobQueue {
     func cancelAll()
 }
 
+// -------------------------------------------------------- \\
 
+// -------------------------------------------------------- \\
 // MARK: - TODO -
 // You are free to edit what's you want !
 
+// GOAL: Manage async job execution in a serial queue: handle success and error, have a look on queue execution...
+// Example in a real world: manage print jobs on a printer.
+
+// 1 - Implement previous protocols:
+//     a. An AsyncJob, which implement a Job
+//     b. a TestQueue which implement a Jobqueue
+// 2 - In Job execute() -> generate a async job which print a console log after X seconds. X is Int number
+//     between 1 and 10. Job have a timeout error after 5seconds waiting.
+// 3 - Complete main func
+// 4 - Complete main2 func
+
+// MARK: - 1.a
 struct AsyncJob: Job {
     var identifier: String
 
@@ -59,6 +82,7 @@ struct AsyncJob: Job {
     }
 }
 
+// MARK: - 1.b
 struct TestQueue: JobQueue {
     var identifier: String
 
@@ -79,7 +103,7 @@ struct TestQueue: JobQueue {
     }
 }
 
-
+// MARK: - 3
 func main() {
     // 1 - Enqueue Jobs
 
@@ -90,7 +114,8 @@ func main() {
     // 4 - print end  when all jobs are done
 }
 
-func mainCancel() {
+// MARK: - 4
+func main2() {
     // Prepare queue like previous func
 
     // 1 - Cancel one job and check that callback print an error
