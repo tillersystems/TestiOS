@@ -4,13 +4,13 @@ import Foundation
 // MARK - Environment / needed ressources
 
 /// Different kind of possible errors after a job execution
-enum JobErrors: Error {
+enum Errors: Error {
     case notImplemented
     case canceled
     case timeout
 }
 
-extension JobErrors: LocalizedError {
+extension Errors: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .notImplemented: return "Not Implemented"
@@ -30,7 +30,7 @@ enum JobStatus {
 /// Simple struct to describe a Job error
 struct JobError: Error {
     /// Permit to know what's kind of error it is.
-    public var error: JobErrors
+    public var error: Errors
     /// Aditional information, depend of the context
     public var data: Any?
 }
@@ -118,7 +118,7 @@ class AsyncJob: Job {
         }
 
         guard status != .canceled else {
-            return .failure(JobError(error: JobErrors.canceled, data: self))
+            return .failure(JobError(error: Errors.canceled, data: self))
         }
 
         let x = Int.random(in: 1..<10)
@@ -137,7 +137,7 @@ class AsyncJob: Job {
             return .success(JobInfo(self))
         }
         status = .done
-        return .failure(JobError(error: JobErrors.timeout, data: self))
+        return .failure(JobError(error: Errors.timeout, data: self))
     }
 }
 
