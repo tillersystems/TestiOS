@@ -38,7 +38,7 @@ protocol Job {
     /// Current status of  job
     var status: JobStatus { get }
     /// Job work
-    func execute() -> JobResult
+    func execute() -> JobResult // Rendez moi ce test avant la nuit, sinon... je m'exécute !
 }
 
 /// Descript current state of a job
@@ -80,7 +80,7 @@ protocol JobQueue {
 
 // -------------------------------------------------------- \\
 // MARK: - TODO -
-// You are free to edit what's you want !
+// You are free to edit what's you want ! It's a base code to help you to start.
 
 // GOAL: Manage async job execution in a serial queue: handle success and error, have a look on queue execution...
 // Example in a real world: manage print jobs on a printer.
