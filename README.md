@@ -6,8 +6,8 @@ GOAL: Manage async job execution in a serial queue: handle success and error, ha
 > Example in a real world: manage print jobs on a printer.
 
 1. Implement given protocols:
-  - a. An AsyncJob, which implement a Job
-  - b. a TestQueue which implement a Jobqueue
+  a. An AsyncJob, which implement a Job
+  b. a TestQueue which implement a Jobqueue
 2. In Job execute() -> generate a async job which print a console log after X seconds. X is Int number between 1 and 10. Job have a timeout error after 5seconds waiting.
 3. Complete main func
 4. Complete main2 func
