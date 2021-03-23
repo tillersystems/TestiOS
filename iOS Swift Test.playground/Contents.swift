@@ -145,7 +145,7 @@ class AsyncJob: Job {
 class TestQueue: JobQueue {
     var identifier: String
 
-    var jobs: [Job] = []
+    var jobs: [Job] = [] // We can have concurrent issues on this var. Need to used a "locked" array or find an other way.
 
     var queue: DispatchQueue
 
