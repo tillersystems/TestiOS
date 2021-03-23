@@ -6,7 +6,25 @@ import Foundation
 /// Different kind of possible errors after a job execution
 enum JobErrors: Error {
     case notImplemented
+    case canceled
     case timeout
+}
+
+extension JobErrors: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .notImplemented: return "Not Implemented"
+        case .canceled: return "Canceled"
+        case .timeout: return "Timeout"
+        }
+    }
+}
+
+enum JobStatus {
+    case waiting
+    case inProgress
+    case done
+    case canceled
 }
 
 /// Simple struct to describe a Job error
@@ -24,8 +42,12 @@ typealias JobResult = Result<JobInfo, JobError>
 protocol Job {
     /// Unique identifier to identify current job
     var identifier: String { get }
+    /// Current status of  job
+    var status: JobStatus { get }
     /// Job work
     func execute() -> JobResult
+
+    func cancel() -> Void
 }
 
 /// Protocol to define minimal requirements to descript a Job queue
@@ -45,7 +67,7 @@ protocol JobQueue {
 
     /// This job queue is an auto-executed job queue
     /// So, when you enqueue a job, it's executed as soon as posible
-    func enqueue(job: Job, completion: (JobResult) -> Void)
+    func enqueue(job: Job, completion: @escaping (JobResult) -> Void)
 
     /// You can cancel a job
     func cancelJob(with jobIdentifier: String)
@@ -71,54 +93,157 @@ protocol JobQueue {
 // 3 - Complete main func
 // 4 - Complete main2 func
 
+// There is a lot of "Solution". Some of them are simpler, other more complexe. Keep in mind to justify your
+// choice during the interview and know how to make it different of better.
+
 // MARK: - 1.a
-struct AsyncJob: Job {
+class AsyncJob: Job {
+
+    var status: JobStatus = .waiting
     var identifier: String
 
-    func execute() -> JobResult {
-        // Execute an async job which wait random second (between 1 and 10) before print it self (identifier). Add a timeout after  5second, and  return an error.
+    public init(identifier: String) {
+        self.identifier = identifier
+    }
 
-        return .failure(JobError(error: JobErrors.notImplemented, data: self))
+    func cancel() {
+        guard status != .done else { return }
+        status = .canceled
+    }
+
+    func execute() -> JobResult {
+        status = .inProgress
+        defer {
+            status = .done
+        }
+
+        guard status != .canceled else {
+            return .failure(JobError(error: JobErrors.canceled, data: self))
+        }
+
+        let x = Int.random(in: 1..<10)
+
+        let group = DispatchGroup()
+
+        group.enter()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(x), execute: {
+            if self.status != .done {
+                print("Job \(self.identifier): success")
+            }
+            group.leave()
+        })
+
+        if group.wait(timeout: .now() + 5) == .success {
+            return .success(JobInfo(self))
+        }
+        status = .done
+        return .failure(JobError(error: JobErrors.timeout, data: self))
     }
 }
 
 // MARK: - 1.b
-struct TestQueue: JobQueue {
+class TestQueue: JobQueue {
     var identifier: String
 
-    var jobs: [Job]
+    var jobs: [Job] = []
 
     var queue: DispatchQueue
 
-    func enqueue(job: Job, completion: (JobResult) -> Void) {
-        // Enqueue Job and execute it
+    public init(identifier: String) {
+        self.identifier = identifier
+        self.queue = DispatchQueue(label: "\(identifier)", qos: .utility)
+    }
+
+    func enqueue(job: Job, completion: @escaping (JobResult) -> Void) {
+        jobs.append(job)
+        queue.async(execute: {
+            completion(job.execute())
+            self.jobs = self.jobs.filter { $0.identifier == job.identifier }
+        })
     }
 
     func cancelJob(with jobIdentifier: String) {
-        // cancel given Job
+        jobs.first(where: { $0.identifier == identifier })?.cancel()
     }
 
     func cancelAll() {
-        // Cancel all jobs
+        jobs.forEach { $0.cancel() }
     }
 }
 
 // MARK: - 3
 func main() {
-    // 1 - Enqueue Jobs
+    let queue = TestQueue(identifier: "test")
 
-    // 2 - Execute them
+    let jobs = [
+        AsyncJob(identifier: "1"),
+        AsyncJob(identifier: "2"),
+        AsyncJob(identifier: "3")
+    ]
 
-    // 3 - Print error when happens
+    let group = DispatchGroup()
 
-    // 4 - print end  when all jobs are done
+    jobs.forEach {
+        group.enter()
+        queue.enqueue(job: $0, completion: { result in
+            var description = ""
+            switch result {
+            case .success(let job):
+                guard let job = job as? AsyncJob else {
+                    description = "Success"
+                    break
+                }
+                description = "Success \(job.identifier)"
+                case .failure(let error): description = "error \(error.error.localizedDescription)"
+            }
+            print("Completion job: \(description)")
+            group.leave()
+        })
+    }
+
+    group.notify(queue: .main, execute: {
+        print("All job executed !!")
+    })
 }
 
 // MARK: - 4
 func main2() {
-    // Prepare queue like previous func
+    let queue = TestQueue(identifier: "test2")
 
-    // 1 - Cancel one job and check that callback print an error
+    let jobs = [
+        AsyncJob(identifier: "1"),
+        AsyncJob(identifier: "2"),
+        AsyncJob(identifier: "3")
+    ]
 
-    // 2 - cancel all jobs and check that all callback print error
+    let group = DispatchGroup()
+
+    jobs.forEach {
+        group.enter()
+        queue.enqueue(job: $0, completion: { result in
+            var description = ""
+            switch result {
+                case .success(let job):
+                    guard let job = job as? AsyncJob else {
+                        description = "Success"
+                        break
+                    }
+                    description = "Success \(job.identifier)"
+                case .failure(let error): description = "error \(error)"
+            }
+            print("Completion job: \(description)")
+            group.leave()
+        })
+    }
+
+    group.notify(queue: .main, execute: {
+        print("All job executed !!")
+    })
+
+    queue.cancelJob(with: "job2")
+    queue.cancelAll()
 }
+
+
+main()
+main2()
