@@ -84,6 +84,8 @@ protocol JobQueue {
 
 // GOAL: Manage async job execution in a serial queue: handle success and error, have a look on queue execution...
 // Example in a real world: manage print jobs on a printer.
+// take 45min / 1hour to do this test. It's not needed to be perfect, but to understand what's you did, and what's you
+// can improve.
 
 // 1 - Implement previous protocols:
 //     a. An AsyncJob, which implement a Job
