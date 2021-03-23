@@ -5,7 +5,7 @@ You are free to edit what's you want ! It's a base code to help you to start.
 GOAL: Manage async job execution in a serial queue: handle success and error, have a look on queue execution...
 > Example in a real world: manage print jobs on a printer.
 
-*Check in playground to understand following instructions.*
+**Check in playground to understand following instructions.**
 
 1. Implement given protocols:
   * a An `AsyncJob`, which implement a `Job`
