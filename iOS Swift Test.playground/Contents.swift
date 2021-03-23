@@ -4,7 +4,7 @@ import Foundation
 // MARK - Environment / needed ressources
 
 /// Different kind of possible errors after a job execution
-enum JobErrors: Error {
+enum Errors: Error {
     case notImplemented
     case timeout
 }
@@ -12,7 +12,7 @@ enum JobErrors: Error {
 /// Simple struct to describe a Job error
 struct JobError: Error {
     /// Permit to know what's kind of error it is.
-    public var error: JobErrors
+    public var error: Errors
     /// Aditional information, depend of the context
     public var data: Any?
 }
@@ -78,7 +78,7 @@ struct AsyncJob: Job {
     func execute() -> JobResult {
         // Execute an async job which wait random second (between 1 and 10) before print it self (identifier). Add a timeout after  5second, and  return an error.
 
-        return .failure(JobError(error: JobErrors.notImplemented, data: self))
+        return .failure(JobError(error: Errors.notImplemented, data: self))
     }
 }
 
