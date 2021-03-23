@@ -1,16 +1,16 @@
 # Senior iOS Test
 
-You are free to edit what's you want ! It's a base code to help you to start.
+You are free to edit whatever you want ! It is a base code to help you get started.
 
 GOAL: Manage async job execution in a serial queue: handle success and error, have a look on queue execution...
-> Example in a real world: manage print jobs on a printer.
+> Example in a real life : manage print jobs on a printer.
 
-**Check in playground to understand following instructions.**
+**Check the playground to understand the following instructions.**
 
-1. Implement given protocols:
-  * a An `AsyncJob`, which implement a `Job`
-  * b. a `TestQueues` which implement a `Jobqueue`
-2. In Job `execute()` -> generate a async job which print a console log after X seconds. X is Int number between 1 and 10. Job have a timeout error after 5seconds waiting.
+1. Implement the given protocols:
+  * a An `AsyncJob`, which implements a `Job`
+  * b. a `TestQueues` which implements a `JobQueue`
+2. In Job `execute()` -> generate an async job which prints a console log after X seconds. X is an Int number between 1 and 10. The Job triggers a timeout error if it waits 5 seconds.
 3. Complete *main* func
 4. Complete *main2* func
 5. Comments
@@ -20,27 +20,27 @@ GOAL: Manage async job execution in a serial queue: handle success and error, ha
 
 ## Test 1
 
-Write a function that compute the sum of the numbers in a given list using a for-loop, foreach-loop, a while-loop, and recursion.
+Write a function that computes the sum of the numbers in a given list using a for-loop, foreach-loop, a while-loop, and recursion.
 
 ## Test 2
 
-Write a function that combines two lists by alternatingly taking elements. For exemple: given two lists [A, B, C] and [1, 2, 3], the results sould be [A, 1, B, 2, C, 3]
+Write a function that combines two lists by alternatively taking elements in each list. For exemple: given these two lists [A, B, C] and [1, 2, 3], the results sould be [A, 1, B, 2, C, 3]
 
 ## Test 3
 
-Let's A be a matrix
+Let A be a matrix
 ```
 A = [ 2  3  2  1 ]  Allowed moves : → or ↓
     [ 5  2  3  1 ]
     [ 1  2  2  1 ]
 width = 4
-heigh = 3
+height = 3
 ```
 
 You can move RIGTH or DOWN.
 You cannot move UP or LEFT.
 
-Write a webservice that calculate the highest path sum in a matrix
+Write a webservice that calculate the highest path sum in the matrix
 following this rule (move only RIGTH or DOWN)
 
 ## Test 4
@@ -51,9 +51,9 @@ As an example, here are the first 10 Fibonnaci numbers: [0, 1, 1, 2, 3, 5, 8, 13
 
 ## Test 5
 
-Write a function that given a list of non negative integers, arranges them such that they form the largest possible number.
+Write a function that given a list of non negative integers, arranges them such as it forms the greatest number possible.
 
-For example, given [50, 2, 1, 9] the largest formed number is 95021.
+For example, given [50, 2, 1, 9] the greatest formed number is 95021.
 
 ## Test 6
 
@@ -62,4 +62,4 @@ Write a program that outputs all possibilities to put + or - or nothing between 
 For example: 1 + 2 + 34 – 5 + 67 – 8 + 9 = 100.
 Formatted as "1+2+34-5+67-8+9".
 
-ps: you're on a git, don't forget it ;)
+PS: you're on a git, don't forget it ;)
