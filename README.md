@@ -5,12 +5,14 @@ You are free to edit what's you want ! It's a base code to help you to start.
 GOAL: Manage async job execution in a serial queue: handle success and error, have a look on queue execution...
 > Example in a real world: manage print jobs on a printer.
 
+*Check in playground to understand following instructions.*
+
 1. Implement given protocols:
-  a. An AsyncJob, which implement a Job
-  b. a TestQueue which implement a Jobqueue
-2. In Job execute() -> generate a async job which print a console log after X seconds. X is Int number between 1 and 10. Job have a timeout error after 5seconds waiting.
-3. Complete main func
-4. Complete main2 func
+  * a An `AsyncJob`, which implement a `Job`
+  * b. a `TestQueues` which implement a `Jobqueue`
+2. In Job `execute()` -> generate a async job which print a console log after X seconds. X is Int number between 1 and 10. Job have a timeout error after 5seconds waiting.
+3. Complete *main* func
+4. Complete *main2* func
 5. Comments
 
 
