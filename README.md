@@ -8,9 +8,9 @@ GOAL: Manage async job execution in a serial queue: handle success and error, ha
 **Check the playground to understand the following instructions.**
 
 1. Implement the given protocols:
-  * a An `AsyncJob`, which implements a `Job`
-  * b. a `TestQueues` which implements a `JobQueue`
-2. In Job `execute()` -> generate an async job which prints a console log after X seconds. X is an Int number between 1 and 10. The Job triggers a timeout error if it waits 5 seconds.
+  * a An `AsyncJob`, which implement a `Job`
+  * b. a `TestQueue` which implement a `JobQueue`
+2. In Job `execute()` -> generate an async job which prints a console log after X seconds. X is an Int number between 1 and 10. The Job triggers a timeout error after 5 seconds.
 3. Complete *main* func
 4. Complete *main2* func
 5. Comments
