@@ -162,7 +162,7 @@ class TestQueue: JobQueue {
         })
     }
 
-    func cancelJob(with jobIdentifier: String) {
+    func cancelJob(with identifier: String) {
         jobs.first(where: { $0.identifier == identifier })?.cancel()
     }
 
@@ -194,7 +194,7 @@ func main() {
                     break
                 }
                 description = "Success \(job.identifier)"
-                case .failure(let error): description = "error \(error.error.localizedDescription)"
+            case .failure(let error): description = "error \(error.error.localizedDescription)"
             }
             print("Completion job: \(description)")
             group.leave()
@@ -240,7 +240,7 @@ func main2() {
         print("All job executed !!")
     })
 
-    queue.cancelJob(with: "job2")
+    queue.cancelJob(with: "2")
     queue.cancelAll()
 }
 
