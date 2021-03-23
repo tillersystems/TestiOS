@@ -24,6 +24,7 @@ enum JobStatus {
     case waiting
     case inProgress
     case done
+    case failure
     case canceled
 }
 
@@ -124,10 +125,10 @@ class AsyncJob: Job {
         let x = Int.random(in: 1..<10)
 
         let group = DispatchGroup()
-
+        // an other way to put this code sync and have a timeout is to use a semaphore.
         group.enter()
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(x), execute: {
-            if self.status != .done {
+            if self.status != .failure && self.status != .canceled {
                 print("Job \(self.identifier): success")
             }
             group.leave()
@@ -136,7 +137,7 @@ class AsyncJob: Job {
         if group.wait(timeout: .now() + 5) == .success {
             return .success(JobInfo(self))
         }
-        status = .done
+        status = .failure
         return .failure(JobError(error: Errors.timeout, data: self))
     }
 }
@@ -247,3 +248,7 @@ func main2() {
 
 main()
 main2()
+
+// Comments
+// We can improve this architecture by using Work items, which are easiest to manage / canceled
+// Issues with this code: concurrent issue on Jobs array
