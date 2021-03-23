@@ -7,6 +7,17 @@ import Foundation
 enum Errors: Error {
     case notImplemented
     case timeout
+    case canceled
+}
+
+extension Errors: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+            case .notImplemented: return "Not Implemented"
+            case .canceled: return "Canceled"
+            case .timeout: return "Timeout"
+        }
+    }
 }
 
 /// Simple struct to describe a Job error
@@ -24,8 +35,19 @@ typealias JobResult = Result<JobInfo, JobError>
 protocol Job {
     /// Unique identifier to identify current job
     var identifier: String { get }
+    /// Current status of  job
+    var status: JobStatus { get }
     /// Job work
     func execute() -> JobResult
+}
+
+/// Descript current state of a job
+enum JobStatus {
+    case waiting
+    case inProgress
+    case done
+    case failure
+    case canceled
 }
 
 /// Protocol to define minimal requirements to descript a Job queue
@@ -70,9 +92,12 @@ protocol JobQueue {
 //     between 1 and 10. Job have a timeout error after 5seconds waiting.
 // 3 - Complete main func
 // 4 - Complete main2 func
+// 5 - Comments
 
 // MARK: - 1.a
 struct AsyncJob: Job {
+    var status: JobStatus
+
     var identifier: String
 
     func execute() -> JobResult {
@@ -122,3 +147,11 @@ func main2() {
 
     // 2 - cancel all jobs and check that all callback print error
 }
+
+
+// MARK: - 5
+// Comments
+//
+// - What're you can do better?
+// - How you can do it with a different way?
+// - Do you know if some issues can appear with your current implementation?
